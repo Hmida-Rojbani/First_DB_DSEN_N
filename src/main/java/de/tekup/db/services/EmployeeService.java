@@ -36,4 +36,10 @@ public class EmployeeService {
 			.orElseThrow(()-> new NoSuchElementException("Employee with this id is not found"));
 	}
 
+	public EmployeeEntity getEmployeeByName(String name) {
+		Optional<EmployeeEntity> opt =  empRepos.findByNameIgnoreCase(name);
+		return opt
+				.orElseThrow(()-> new NoSuchElementException("Employee with this name is not found"));
+	}
+
 }

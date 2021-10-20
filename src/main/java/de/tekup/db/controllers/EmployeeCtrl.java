@@ -36,5 +36,11 @@ public class EmployeeCtrl {
 		return empService.getEmployeeById(id);
 	}
 	
+	@GetMapping("/employee/get/name/{name}")
+	public EmployeeEntity getOneEmployee(@PathVariable String name) {
+		return empService.getEmployeeByName(name);
+	}
+	
+	
 
 }
