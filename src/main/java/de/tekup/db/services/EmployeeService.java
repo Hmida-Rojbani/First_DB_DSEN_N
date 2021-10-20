@@ -62,13 +62,21 @@ public class EmployeeService {
 //				entity.setDob(newEntity.getDob());
 //			if(newEntity.getEmail()!=null)
 //				entity.setEmail(newEntity.getEmail());
-			newEntity.setCode(entity.getCode());
-						
+			
+			newEntity.setCode(entity.getCode());					
 			BeanUtils.copyProperties(newEntity, entity, getNullFields(newEntity));
 			
 			return empRepos.save(entity);
 			
 		}
+		
+		//SQL : delete
+		public EmployeeEntity deleteEmployeeById(int id) {
+			EmployeeEntity entity = getEmployeeById(id);
+			empRepos.deleteById(id);
+			return entity;
+		}
+		
 		// find null attributes in the received object
 		private String[] getNullFields(EmployeeEntity newEntity) {
 			ArrayList<String> strs = new ArrayList<String>();
