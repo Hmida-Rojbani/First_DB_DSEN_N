@@ -12,15 +12,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import de.tekup.db.entities.EmployeeEntity;
+import de.tekup.db.entities.Matricule;
 import de.tekup.db.repositories.EmployeeRepository;
+import de.tekup.db.repositories.MatriculeRepository;
+import lombok.AllArgsConstructor;
 
 @Service
+@AllArgsConstructor
 public class EmployeeService {
-	@Autowired
+	
 	private EmployeeRepository empRepos;
+	private MatriculeRepository matRepos;
 	
 	//SQL insert
 	public EmployeeEntity saveEmpToDB(EmployeeEntity employeeEntity) {
+//		Matricule matricule = employeeEntity.getMatricule();
+//		matRepos.save(matricule);
 		return empRepos.save(employeeEntity);
 	}
 	
