@@ -1,6 +1,8 @@
 package de.tekup.db.services;
 
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,5 +25,15 @@ public class EmployeeService {
 		return empRepos.findAll();
 	}
 	
+	// SQL : select * from employee where id = id 
+	public EmployeeEntity getEmployeeById(int id) {
+		Optional<EmployeeEntity> opt =  empRepos.findById(id);
+//		if(opt.isPresent())
+//			return opt.get();
+//		throw new NoSuchElementException("Employee with this id is not found");
+		
+		return opt
+			.orElseThrow(()-> new NoSuchElementException("Employee with this id is not found"));
+	}
 
 }
