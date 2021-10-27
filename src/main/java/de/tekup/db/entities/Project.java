@@ -1,5 +1,6 @@
 package de.tekup.db.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -10,7 +11,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
+import lombok.Data;
+
 @Entity
+@Data
+@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
 public class Project {
 	
 	@Id
@@ -25,6 +33,6 @@ public class Project {
 	@JoinTable(name = "affected_in",
 	joinColumns = @JoinColumn(name="project"),
 	inverseJoinColumns = @JoinColumn(name = "employee"))
-	private List<EmployeeEntity> employees;
+	private List<EmployeeEntity> employees = new ArrayList<>();
 
 }

@@ -1,6 +1,7 @@
 package de.tekup.db.entities;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -14,26 +15,26 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import lombok.Data;
 
 @Entity
 @Table(name = "employee")
 @Data
-public class EmployeeEntity {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int code;
-	@Column(length = 50)
-	private String name;
+@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="code")
+public class EmployeeEntity extends Person{
+	
 	@Column(length = 70, nullable = false, unique = true)
 	private String email;
 	
 	private LocalDate dob;
 	
-	@OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+	@OneToOne(cascade = CascadeType.PERSIST)
 	private Matricule matricule;
 	
 	@ManyToMany(mappedBy = "employees")
-	private List<Project> projects;
+	private List<Project> projects = new ArrayList<Project>();
 
 }

@@ -12,12 +12,15 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import lombok.Data;
 
 @Entity
 @Data
+@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
 public class Matricule {
 	
 	@Id
@@ -34,7 +37,6 @@ public class Matricule {
 	
 	@ManyToOne
 	@JoinColumn(name="creator")
-	@JsonBackReference
 	private Admin creator;
 
 }
