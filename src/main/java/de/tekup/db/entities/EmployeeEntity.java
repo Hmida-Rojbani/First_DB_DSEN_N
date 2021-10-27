@@ -1,6 +1,7 @@
 package de.tekup.db.entities;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -9,6 +10,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -31,6 +33,7 @@ public class EmployeeEntity {
 	@OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
 	private Matricule matricule;
 	
-	
+	@ManyToMany(mappedBy = "employees")
+	private List<Project> projects;
 
 }
